@@ -1,0 +1,58 @@
+<ion-header (dblclick)="scrollTo()" (click)="test()">
+  <ion-navbar color="primary" style="opacity: 0.8;" no-border-bottom style="padding-top: 35px;padding-bottom:12px ">
+    <ion-title>首页</ion-title>
+    <ion-buttons end>
+        <button ion-button (click)="share($event)">
+            <ion-icon name="share"></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content fullscreen (ionScroll)="check()">
+  <!-- <ion-fab bottom right *ngIf="toTop" [ngClass]="{'show':top,'hide':!top}">
+    <button ion-fab (click)="scrollTo()">
+      回顶部
+    </button>
+  </ion-fab> -->
+  <!-- <ion-fab bottom right class="hide" id="div">
+    <button ion-fab (click)="scrollTo()">
+      回顶部
+    </button> 
+  </ion-fab>-->
+  <div id="div" class="hide" style="width:50px;height:50px;border-radius:50px;
+  background: red;
+  position: fixed;left: 280px;
+  z-index: 100;"></div>
+
+  <!-- 一个旋转器，得到数据后被关闭（销毁） -->
+  <ion-row *ngIf="spinner1">
+    <ion-col text-center>
+      <ion-spinner></ion-spinner>
+    </ion-col>
+  </ion-row>
+
+  <ion-slides id="topest" loop={{loop}}>
+    <ion-slide *ngFor="let item of slides" (click)="goDetails(item)">
+      <!-- ![]({{item.PictUrl}}) 这是markdown识别问题，改为<img> -->
+      <img src="{{item.PictUrl}}">
+      <div class="cover"></div>
+      <span class="title">{{item.Title}}</span>
+    </ion-slide>
+  </ion-slides>
+
+
+  <div class="categories">
+    <ion-grid>
+      <ion-row wrap>
+        <ion-col text-center tappable col-3 *ngFor="let c of categories" (click)="goProductList(c)">
+          <i class="iconfont {{c.Icon}} icon"></i>
+          <span class="title">{{c.FavoritesTitle}}</span>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <ion-item-divider class="t-header" color="light"> 年会礼服2017年新款 </ion-item-divider>
+  <ion-products [products]="products"></ion-products>
+</ion-content>

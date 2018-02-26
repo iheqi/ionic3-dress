@@ -1,0 +1,22 @@
+<ion-header id="header">
+  <ion-navbar style="opacity: 0.8" no-border-bottom color="primary" style="padding-top: 35px;padding-bottom:15px ">
+    <ion-title>{{selectedItem.FavoritesTitle}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content fullscreen>
+	<ion-fab bottom right>
+   		<button ion-fab (click)="scrollIntoView(header)">
+   			<ion-icon name="md-arrow-up"></ion-icon>
+   		</button>
+	</ion-fab>
+  <ion-products [products]="products"></ion-products>
+  <ion-row>
+    <ion-col class="nodata" text-center *ngIf="!hasmore">
+      没有商品啦 ♪(^∇^*)♪
+    </ion-col>
+  </ion-row>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  
+</ion-content>
